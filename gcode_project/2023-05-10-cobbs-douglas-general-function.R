@@ -61,7 +61,7 @@ cobbs_douglas_utility = function(I, a=0.5, b=0.5, px, py){
   #
   
   #
-  df = data.frame(x, y = f_cobbs_y(x, U = max_U, a = a, b = b)) %>% mutate(Budget = x*px+y*py)
+  df = data.frame(x, y = f_cobbs_y(x, U = max_U, a = a, b = b), max_U) %>% mutate(Budget = x*px+y*py)
   # we can see that we are over our budget
   head(df) #
   # we retrieve the row which respect our budget
@@ -88,7 +88,8 @@ cobbs_douglas_utility = function(I, a=0.5, b=0.5, px, py){
 }
 
 #
-cobbs_douglas_utility(I = 450, a = 0.4, b = 0.6, px = 4, py = 3.5)
+cobbs_douglas_utility(I = 100, a = 0.25, b = 0.75, px = 1, py = 1)
+cobbs_douglas_utility(I = 100, a = 0.25, b = 0.75, px = 1, py = 1)
 #
 
 ##########################################################################################
