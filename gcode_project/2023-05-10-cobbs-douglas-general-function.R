@@ -93,13 +93,30 @@ cobbs_douglas_utility = function(I, a=0.5, b=0.5, px, py){
 }
 
 #
-model1 = cobbs_douglas_utility(I = 100, a = 0.25, b = 0.75, px = 1, py = 1)$df
-model2 = cobbs_douglas_utility(I = 100, a = 0.25, b = 0.75, px = 1, py = 2)$df
-model3 = cobbs_douglas_utility(I = 100, a = 0.25, b = 0.75, px = 2, py = 1)$df
+model1 = cobbs_douglas_utility(I = 100, a = 0.25, b = 0.75, px = 1, py = 1)
+model2 = cobbs_douglas_utility(I = 100, a = 0.25, b = 0.75, px = 1, py = 2)
+model3 = cobbs_douglas_utility(I = 100, a = 0.25, b = 0.75, px = 2, py = 1)
+model4_policy = cobbs_douglas_utility(I = 200, a = 0.25, b = 0.75, px = 2, py = 3)
 #
 
 #
-models = bind_rows(model1, model2, model3, .id = 'model')
+model4_policy
+#
+
+# gather models #
+models = bind_rows(model1$df, model2$df, model3$df, model4_policy$df, .id = 'model')
+optimal_bundles = bind_rows(model1$optimal_bundle, model2$optimal_bundle, model3$optimal_bundle, model4_policy$optimal_bundle, .id = 'model')
+#
+
+#
+models
+optimal_bundles
+#
+
+library(ggthemes)
+
+#
+U_max = paste("U = ", round(optimal_bundles$max_U, 1))
 #
 
 #
@@ -110,6 +127,8 @@ models %>%
   ylim(c(0, 120)) + 
   xlim(c(0, 120)) + 
   theme_minimal() + 
+  annotate(geom = "text", x = optimal_bundles$x, optimal_bundles$y, label = U_max) + 
+  scale_color_calc() + 
   geom_abline(slope = 1, linetype = 2, alpha = 0.4)
 #
 
