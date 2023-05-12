@@ -36,10 +36,10 @@ cobbs_douglas_utility = function(I, a=0.5, b=0.5, px, py){
   
   # find maximum number of x I can get given their price
   # what if I spent all my money on x
-  x_max = f_max(I = 100, p = px)
+  x_max = f_max(I = I, p = px)
   # find maximum number of x I can get given their price
   # what if I spent all my money on y
-  y_max = f_max(I = 100, p = py)
+  y_max = f_max(I = I, p = py)
   #
   
   # slope of budget line is px/py
@@ -74,7 +74,7 @@ cobbs_douglas_utility = function(I, a=0.5, b=0.5, px, py){
   #
   
   # this is our budget line, given the prices of x and y #
-  plot(x,y, type = "l", xlim = c(0,40), ylim = c(0,60))
+  plot(x,y, type = "l", xlim = c(0,x_max), ylim = c(0,y_max))
   abline(h=0,v=0, col = 'gray')
   lines(x, y_Umax, type = 'l', col = 'red')
   abline(h = df[w, ]$y, v = df[w, ]$x, col = 'blue')
@@ -88,7 +88,7 @@ cobbs_douglas_utility = function(I, a=0.5, b=0.5, px, py){
 }
 
 #
-cobbs_douglas_utility(I = 1000, a = 0.4, b = 0.6, px = 4, py = 3.5)
+cobbs_douglas_utility(I = 450, a = 0.4, b = 0.6, px = 4, py = 3.5)
 #
 
 ##########################################################################################
