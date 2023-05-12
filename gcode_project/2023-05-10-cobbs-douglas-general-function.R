@@ -84,13 +84,58 @@ cobbs_douglas_utility = function(I, a=0.5, b=0.5, px, py){
   optimal_bundle = df[w, ]
   #
   
-  return(list(x_max = x_max, y_max = y_max, slope = slope, x = x, y = y, y_Umax = y_Umax, U=U, optimal_bundle = optimal_bundle))
+  #
+  df = data.frame(x, y, y_Umax)
+  #
+  
+  #
+  return(list(df = df, x_max = x_max, y_max = y_max, slope = slope, x = x, y = y, y_Umax = y_Umax, U=U, optimal_bundle = optimal_bundle))
 }
 
 #
-cobbs_douglas_utility(I = 100, a = 0.25, b = 0.75, px = 1, py = 1)
-cobbs_douglas_utility(I = 100, a = 0.25, b = 0.75, px = 1, py = 1)
+model1 = cobbs_douglas_utility(I = 100, a = 0.25, b = 0.75, px = 1, py = 1)$df
+model2 = cobbs_douglas_utility(I = 100, a = 0.25, b = 0.75, px = 1, py = 2)$df
+model3 = cobbs_douglas_utility(I = 100, a = 0.25, b = 0.75, px = 2, py = 1)$df
+#
+
+#
+models = bind_rows(model1, model2, model3, .id = 'model')
+#
+
+#
+models %>% 
+  ggplot(aes(x,y, colour = model)) + 
+  geom_line() + 
+  geom_line(aes(x,y_Umax, colour = model), linetype = 5) + 
+  ylim(c(0, 120)) + 
+  xlim(c(0, 120)) + 
+  theme_minimal() + 
+  geom_abline(slope = 1, linetype = 2, alpha = 0.4)
 #
 
 ##########################################################################################
 ##########################################################################################
+
+#
+model4 = cobbs_douglas_utility(I = 400, a = 0.25, b = 0.75, px = 1, py = 4)$df
+model5 = cobbs_douglas_utility(I = 400, a = 0.25, b = 0.75, px = 4, py = 1)$df
+#
+
+#
+models = bind_rows(model1, model2, model3, model4, model5, .id = 'model')
+#
+
+#
+models %>% 
+  ggplot(aes(x,y, colour = model)) + 
+  geom_line() + 
+  geom_line(aes(x,y_Umax, colour = model), linetype = 5) + 
+  ylim(c(0, 420)) + 
+  xlim(c(0, 420)) + 
+  theme_minimal() + 
+  geom_abline(slope = 1, linetype = 2, alpha = 0.4)
+#
+
+##########################################################################################
+##########################################################################################
+
