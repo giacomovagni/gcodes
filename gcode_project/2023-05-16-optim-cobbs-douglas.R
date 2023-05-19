@@ -58,6 +58,8 @@ out = optim(par = c(1), # starting value #
       control = list(fnscale = -1)) # maximize instead of minimize
 #
 
+out$par
+
 # we can put it back into our function and retrieve the ideal value #
 f(par = out$par, m = 100, px = 1, py = 1, a = 0.2, b = 0.8)
 #
