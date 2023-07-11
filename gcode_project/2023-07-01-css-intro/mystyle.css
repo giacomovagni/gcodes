@@ -1,0 +1,12 @@
+body{
+	padding: auto;
+	margin-left: 100px;
+	color:  #5d6d7e ;
+	background-color:  #aab7f1;
+	font-size: 18px;
+	font-family: Helvetica, Geneva, Arial,
+          SunSans-Regular, sans-serif;
+}
+h1{
+	font-size: 25px;
+}
